@@ -15,14 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "YOUR_APP_ID"
-            $0.clientKey = ""
-            $0.server = "ec2-3-143-255-194.us-east-2.compute.amazonaws.com/parse"
+            $0.applicationId = "myappID"
+            $0.clientKey = "aWD1LS2Z8Kdm"
+            $0.server = "http://ec2-3-143-204-92.us-east-2.compute.amazonaws.com/parse"
         }
         Parse.initialize(with: configuration)
-        
         return true
     }
 
