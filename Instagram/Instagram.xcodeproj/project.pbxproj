@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -88,7 +88,6 @@
 				29C482095AD315413C900DDB /* Pods-Instagram.debug.xcconfig */,
 				BAC0B2B3726F5078568045B9 /* Pods-Instagram.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
