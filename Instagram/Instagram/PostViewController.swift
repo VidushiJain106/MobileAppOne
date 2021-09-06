@@ -52,12 +52,14 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
     @IBAction func postImage(_ sender: Any) {
         print("trying to post")
         if let image = imageToPost.image {
+            
+            let newImage = image.resized(withPercentage: 0.25)
         
             let post = PFObject(className: "Post")
             post["message"] = comment.text
             post["userid"] = PFUser.current()?.objectId
             print(post)
-            if let imageData = image.pngData() {
+            if let imageData = newImage!.pngData() {
                 let imageFile = PFFileObject(name: "image.png", data: imageData)
                 post["imageFile"] = imageFile
                 showLoadingIcon()
@@ -86,7 +88,8 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
     @IBOutlet weak var imageToPost: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     
