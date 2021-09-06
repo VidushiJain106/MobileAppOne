@@ -71,17 +71,77 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mS1-Sm-re9"/>
                     <connections>
                         <outlet property="email" destination="HU7-yg-zG0" id="aJY-dP-fhG"/>
                         <outlet property="password" destination="c7c-8L-aQN" id="bZW-vb-yf9"/>
                         <outlet property="singUpOrLoginButton" destination="LgR-8u-6F0" id="iiY-46-fNq"/>
                         <outlet property="switchLoginModeButton" destination="XNh-49-DBr" id="Gf5-tI-3q9"/>
                         <outlet property="switchLoginModeLabel" destination="19i-N1-a1c" id="GDc-Nw-H04"/>
+                        <segue destination="G6e-11-ig1" kind="presentation" identifier="showUserTable" modalPresentationStyle="fullScreen" id="1BC-c0-C94"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="55.580357142857139"/>
+            <point key="canvasLocation" x="-920" y="209"/>
+        </scene>
+        <!--UserTableViewController-->
+        <scene sceneID="AxZ-Ae-qVQ">
+            <objects>
+                <tableViewController title="UserTableViewController" id="UL6-zu-PXS" customClass="UserTableViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NBU-cl-zWz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="pnh-C9-NNg">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pnh-C9-NNg" id="xbi-6C-PTu">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UL6-zu-PXS" id="IcF-95-Xzr"/>
+                            <outlet property="delegate" destination="UL6-zu-PXS" id="sVf-WW-wLg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Users" id="wVc-Sr-0qB">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="RkP-Sy-SQq">
+                            <connections>
+                                <action selector="logoutUser:" destination="UL6-zu-PXS" id="M0e-0h-n9A"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" modalPresentationStyle="fullScreen" id="gqa-SG-u8H"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gkJ-VJ-7pG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="597" y="209"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="U6w-hz-Kdd">
+            <objects>
+                <navigationController id="G6e-11-ig1" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="5UC-9b-OjS"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6HL-lS-NYz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EiV-1Y-X7I">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="UL6-zu-PXS" kind="relationship" relationship="rootViewController" id="Lv2-UT-AQQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDR-Dm-0um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-166" y="209"/>
         </scene>
     </scenes>
     <resources>

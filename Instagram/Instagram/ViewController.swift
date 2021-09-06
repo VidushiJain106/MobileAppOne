@@ -55,6 +55,8 @@ class ViewController: UIViewController{
                         // Show the errorString somewhere and let the user try again.
                     } else {
                         print("Signed Up")
+                        
+                        self.performSegue(withIdentifier: "showUserTable", sender: self)
                         // Hooray! Let them use the app now.
                     }
                 }
@@ -65,12 +67,15 @@ class ViewController: UIViewController{
                   self.view.isUserInteractionEnabled = true
                   if user != nil {
                     print("Logged in")
+                    
+                    self.performSegue(withIdentifier: "showUserTable", sender: self)
+                    
                   } else {
                     if error != nil {
                         let errorString = error!.localizedDescription
-                        self.displayAlert(title: "Error signing up", message: errorString)
+                        self.displayAlert(title: "Error logging in", message: errorString)
                     } else {
-                        self.displayAlert(title: "Error signing up", message: "Unknown Error")
+                        self.displayAlert(title: "Error logging in", message: "Unknown Error")
                     }
                   }
                 }
@@ -95,6 +100,15 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if PFUser.current() != nil {
+            
+            performSegue(withIdentifier: "showUserTable", sender: self)
+        }
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
 }
