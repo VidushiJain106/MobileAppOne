@@ -108,13 +108,22 @@
                             <outlet property="delegate" destination="UL6-zu-PXS" id="sVf-WW-wLg"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="HTp-iO-4Kl"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Users" id="wVc-Sr-0qB">
+                        <barButtonItem key="leftBarButtonItem" title="Post" id="AI9-hU-C6z">
+                            <connections>
+                                <segue destination="CXD-DM-KPY" kind="show" id="yh1-dR-vze"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="RkP-Sy-SQq">
                             <connections>
                                 <action selector="logoutUser:" destination="UL6-zu-PXS" id="M0e-0h-n9A"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" modalPresentationStyle="fullScreen" id="gqa-SG-u8H"/>
                     </connections>
@@ -142,6 +151,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDR-Dm-0um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-166" y="209"/>
+        </scene>
+        <!--Post Image-->
+        <scene sceneID="Ht9-ND-bgZ">
+            <objects>
+                <viewController title="Post Image" id="CXD-DM-KPY" customClass="PostViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y6p-hk-TGg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XzF-Er-HWc">
+                                <rect key="frame" x="20" y="111" width="353" height="281"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84989126932989689" green="0.84989126932989689" blue="0.84989126932989689" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzX-sE-N62">
+                                <rect key="frame" x="160" y="494" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.062745101750000004" green="0.50980395079999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="postImage:" destination="CXD-DM-KPY" eventType="touchUpInside" id="mvc-Ox-fig"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="soK-Hw-kFj">
+                                <rect key="frame" x="137" y="414" width="119" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose an image"/>
+                                <connections>
+                                    <action selector="chooseImage:" destination="CXD-DM-KPY" eventType="touchUpInside" id="D4d-Bf-Wre"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4oh-ao-vJk">
+                                <rect key="frame" x="20" y="452" width="353" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="e9i-az-goT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Post Image" id="fyQ-Mb-KbR"/>
+                    <connections>
+                        <outlet property="chooseImageButton" destination="soK-Hw-kFj" id="aHP-yl-VTZ"/>
+                        <outlet property="comment" destination="4oh-ao-vJk" id="n95-o4-pr7"/>
+                        <outlet property="imageToPost" destination="XzF-Er-HWc" id="GUT-Ob-WeS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vOy-j3-K69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1340.5797101449277" y="208.92857142857142"/>
         </scene>
     </scenes>
     <resources>

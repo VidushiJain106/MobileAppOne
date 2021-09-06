@@ -17,8 +17,7 @@ class ViewController: UIViewController{
     
     func displayAlert(title:String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
-                self.dismiss(animated:true, completion: nil)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: { (action) in
             }))
         self.present(alert, animated: true)
     }
@@ -67,7 +66,6 @@ class ViewController: UIViewController{
                   self.view.isUserInteractionEnabled = true
                   if user != nil {
                     print("Logged in")
-                    
                     self.performSegue(withIdentifier: "showUserTable", sender: self)
                     
                   } else {
@@ -105,7 +103,6 @@ class ViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         
         if PFUser.current() != nil {
-            
             performSegue(withIdentifier: "showUserTable", sender: self)
         }
         

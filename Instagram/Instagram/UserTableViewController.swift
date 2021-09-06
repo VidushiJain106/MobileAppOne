@@ -55,7 +55,6 @@ class UserTableViewController: UITableViewController {
                                 }
                             }
                             if self.usernames.count == self.isFollowing.count {
-                                print("refreshed")
                                 self.tableView.reloadData()
                                 self.refresher.endRefreshing()
                             }
@@ -68,7 +67,7 @@ class UserTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            updateTable()
+        updateTable()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(UserTableViewController.updateTable), for:UIControl.Event.valueChanged)
         tableView.addSubview(refresher)
