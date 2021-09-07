@@ -112,11 +112,18 @@
                         <barButtonItem title="Item" id="HTp-iO-4Kl"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Users" id="wVc-Sr-0qB">
-                        <barButtonItem key="leftBarButtonItem" title="Post" id="AI9-hU-C6z">
-                            <connections>
-                                <segue destination="CXD-DM-KPY" kind="show" id="yh1-dR-vze"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Post" id="AI9-hU-C6z">
+                                <connections>
+                                    <segue destination="CXD-DM-KPY" kind="show" id="yh1-dR-vze"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Feed" id="Ngn-1D-cAL">
+                                <connections>
+                                    <segue destination="D2p-6x-s1L" kind="show" id="ngE-zd-sRg"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="RkP-Sy-SQq">
                             <connections>
                                 <action selector="logoutUser:" destination="UL6-zu-PXS" id="M0e-0h-n9A"/>
@@ -208,7 +215,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOy-j3-K69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1340.5797101449277" y="208.92857142857142"/>
+            <point key="canvasLocation" x="1478" y="-204"/>
+        </scene>
+        <!--Your Feed-->
+        <scene sceneID="fa5-Ek-oc1">
+            <objects>
+                <tableViewController id="D2p-6x-s1L" customClass="FeedTableViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0cs-mE-gab">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="328" id="EBl-sE-sOm" customClass="FeedTableViewCell" customModule="Instagram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="328"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EBl-sE-sOm" id="n7r-So-PTa">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="328"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2v-j1-ly5">
+                                            <rect key="frame" x="0.0" y="11" width="414" height="250"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPe-i5-gA8">
+                                            <rect key="frame" x="77" y="260" width="251" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xC-n7-8Dd">
+                                            <rect key="frame" x="77" y="296" width="251" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="comment" destination="1xC-n7-8Dd" id="1of-zP-fkB"/>
+                                    <outlet property="postedImage" destination="w2v-j1-ly5" id="ldr-lb-yKh"/>
+                                    <outlet property="userInfo" destination="CPe-i5-gA8" id="Nv2-oD-Y8P"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="D2p-6x-s1L" id="Fw5-dd-UnN"/>
+                            <outlet property="delegate" destination="D2p-6x-s1L" id="d0P-rg-txm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Your Feed" id="EbH-8F-VIR"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygE-4w-Syp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1508.6956521739132" y="566.51785714285711"/>
         </scene>
     </scenes>
     <resources>

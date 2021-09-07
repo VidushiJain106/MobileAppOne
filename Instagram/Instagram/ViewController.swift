@@ -50,6 +50,7 @@ class ViewController: UIViewController{
                     
                     if let error = error {
                         let errorString = error.localizedDescription
+                        print(errorString)
                         self.displayAlert(title: "Error signing up", message: errorString)
                         // Show the errorString somewhere and let the user try again.
                     } else {
