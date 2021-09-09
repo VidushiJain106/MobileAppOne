@@ -37,7 +37,7 @@ To connect to server:
 
 
 To run the backend server which serves the paths to the topic photos:
-* python imageServer.py
+* python imageSearch.py
 
 To run a server that serves the images:
 * python3 -m http.server 8000
