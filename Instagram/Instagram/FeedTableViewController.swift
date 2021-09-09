@@ -14,6 +14,45 @@ class FeedTableViewController: UITableViewController {
     var comments = [String]()
     var usernames = [String]()
     var imageFiles = [PFFileObject]()
+    var images = [UIImage]()
+    
+    func getImageFromPath(imagePath:String) {
+        let url = URL(string: "http://ec2-3-143-204-92.us-east-2.compute.amazonaws.com:8000" + imagePath)!
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                let image = UIImage(data: data)!
+                self.images.append(image)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else if let error = error {
+                print("HTTP Request Failed \(error)")
+            }
+        }
+        task.resume()
+    }
+    
+    func getPhotosForTopic(topic:String) {
+        let url = URL(string: "http://ec2-3-143-204-92.us-east-2.compute.amazonaws.com:5000/search/" + topic.dropFirst(1))!
+        print(url)
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let dictionary = json as? [String: Any] {
+                    if let imagePaths = dictionary["images"] as? [String] {
+                        for imagePath in imagePaths {
+                            self.getImageFromPath(imagePath: imagePath)
+                            self.comments.append("")
+                            self.usernames.append(topic)
+                        }
+                    }
+                }
+            } else if let error = error {
+                print("HTTP Request Failed \(error)")
+            }
+        }
+        task.resume()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +73,29 @@ class FeedTableViewController: UITableViewController {
                 if let followers = objects {
                     for follower in followers {
                         if let followedUser = follower["following"] {
-                            
-                            let postsQuery = PFQuery(className: "Post")
-                            postsQuery.whereKey("userid", equalTo: followedUser)
-                            postsQuery.findObjectsInBackground { objects,error in
-                                if let posts = objects {
-                                    for post in posts {
-                                        self.comments.append(post["message"] as! String)
-                                        self.usernames.append(self.users[post["userid"] as! String]!)
-                                        self.imageFiles.append(post["imageFile"] as! PFFileObject)
-                                        self.tableView.reloadData()
+                            if self.users[followedUser as! String]!.hasPrefix("#") {
+                                self.getPhotosForTopic(topic: self.users[followedUser as! String]!)
+                            } else {
+                                let postsQuery = PFQuery(className: "Post")
+                                postsQuery.whereKey("userid", equalTo: followedUser)
+                                postsQuery.findObjectsInBackground { objects,error in
+                                    if let posts = objects {
+                                        
+                                        for post in posts {
+                                            if let imageFile = post["imageFile"] {
+                                                (imageFile as! PFFileObject).getDataInBackground { data, error in
+                                                    if let imageData = data {
+                                                        if let imageToDisplay = UIImage(data:imageData) {
+                                                            self.images.append(imageToDisplay)
+                                                            self.comments.append(post["message"] as! String)
+                                                            self.usernames.append(self.users[post["userid"] as! String]!)
+                                                            self.tableView.reloadData()
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -64,7 +116,7 @@ class FeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return comments.count
+        return images.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -75,15 +127,7 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FeedTableViewCell
         
-        imageFiles[indexPath.row].getDataInBackground { data, error in
-            if let imageData = data {
-                if let imageToDisplay = UIImage(data:imageData) {
-                    cell.postedImage.image = imageToDisplay
-                }
-                
-            }
-        }
-        
+        cell.postedImage.image = self.images[indexPath.row]
         cell.comment.text = comments[indexPath.row]
         cell.userInfo.text = usernames[indexPath.row]
 
@@ -109,7 +153,7 @@ class FeedTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -139,3 +183,5 @@ class FeedTableViewController: UITableViewController {
     */
 
 }
+
+

@@ -67,6 +67,7 @@ class UserTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         updateTable()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(UserTableViewController.updateTable), for:UIControl.Event.valueChanged)
