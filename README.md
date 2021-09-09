@@ -28,7 +28,24 @@ A bug I encountered was the course used an older version of Swift. I was able to
 URL to my repository - https://github.com/VidushiJain106/MobileAppOne
 
 
+AWS Commands:
 
+To connect to server:
+
+* cd ~/MobileAppOne
+* ssh -i "instagram.pem" bitnami@ec2-3-143-204-92.us-east-2.compute.amazonaws.com
+
+
+To run the backend server which serves the paths to the topic photos:
+* python imageServer.py
+
+To run a server that serves the images:
+* python3 -m http.server 8000
+
+
+Problems:
+
+Setting up the server -> Username from aws was incorrect. When trying to logon to the commandline with user@aws.ip 
 
 
 
