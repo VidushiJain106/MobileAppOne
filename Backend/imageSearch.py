@@ -11,6 +11,8 @@ class ImageSearch(Resource):
                     'comments': ['Half Moon', 'Connecting with nature!', 'Yoga with sunset']}
         elif tag == "travel":
             return {'images': ['/data/travel/travel1.jpeg', '/data/travel/travel2.jpeg', '/data/travel/travel3.jpeg']}
+        elif tag == "dogs":
+            return{'images': []}
         else:
             return {'images': []}
 
